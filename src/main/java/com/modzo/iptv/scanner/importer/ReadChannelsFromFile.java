@@ -4,7 +4,10 @@ import com.modzo.iptv.scanner.Channel;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URI;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,7 +22,7 @@ public class ReadChannelsFromFile {
 
         Set<Channel> channels = new LinkedHashSet<>();
         int i = 0;
-        while (i + 2 <= lines.size() - 1) {
+        while (i + 2 <= lines.size()) {
             String firstLine = lines.get(i);
             i++;
             String secondLine = lines.get(i);

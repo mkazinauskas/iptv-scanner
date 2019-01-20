@@ -17,5 +17,8 @@ class ImportChannelsFromFileSpec extends Specification {
         then:
             channels[0].name == 'LRT Televizija HD'
             channels[0].uri.toString() == 'udp://@233.136.41.158:1234'
+
+            channels[1].name == 'LRT Televizija'
+            channels[1].uri.toString() == 'udp://@233.136.41.170:1234'
     }
 }

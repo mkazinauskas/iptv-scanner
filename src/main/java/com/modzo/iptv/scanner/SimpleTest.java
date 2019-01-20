@@ -34,6 +34,10 @@ public class SimpleTest {
             System.out.print("No channels parsed");
             return;
         }
+
+        String allChannels = new M3uExporter().export(channels);
+        toFile(allChannels, "all.m3u");
+
         ChannelVerifier verifier = new ChannelVerifier("http://localhost:1111/udp/", 5);
 
         List<Channel> verifiedChannels = channels.stream()
@@ -64,11 +68,9 @@ public class SimpleTest {
 
         String exportedValidChannels = new M3uExporter().export(verifiedChannels.stream().filter(Channel::isValid).collect(Collectors.toList()));
         String exportedInvalidChannels = new M3uExporter().export(verifiedChannels.stream().filter(channel -> !channel.isValid()).collect(Collectors.toList()));
-        String allChannels = new M3uExporter().export(channels);
 
         toFile(exportedValidChannels, "valid.m3u");
         toFile(exportedInvalidChannels, "invalid.m3u");
-        toFile(allChannels, "all.m3u");
     }
 
     private static void toFile(String exportedInvalidChannels, String fileName) {
