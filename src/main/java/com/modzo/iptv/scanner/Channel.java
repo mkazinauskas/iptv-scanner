@@ -1,6 +1,7 @@
 package com.modzo.iptv.scanner;
 
 import java.net.*;
+import java.util.Objects;
 
 public class Channel {
 
@@ -34,5 +35,19 @@ public class Channel {
 
     public Channel invalidChannel (){
         return new Channel(this.name, this.uri, false);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Channel channel = (Channel) o;
+        return Objects.equals(uri, channel.uri);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(uri);
     }
 }

@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
@@ -18,7 +17,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Collectors;
 
 public class SimpleTest {
-    private static final ThreadPoolExecutor EXECUTOR = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
+    private static final ThreadPoolExecutor EXECUTOR = (ThreadPoolExecutor) Executors.newFixedThreadPool(30);
 
     public static void main(String[] args) {
         String playlist;
@@ -65,27 +64,20 @@ public class SimpleTest {
 
         String exportedValidChannels = new M3uExporter().export(verifiedChannels.stream().filter(Channel::isValid).collect(Collectors.toList()));
         String exportedInvalidChannels = new M3uExporter().export(verifiedChannels.stream().filter(channel -> !channel.isValid()).collect(Collectors.toList()));
+        String allChannels = new M3uExporter().export(channels);
 
-        try {
-            Path path = Paths.get("valid.m3u");
-            System.out.println(path.toString());
-            try {
-                Files.createFile(path);
-            } catch (Exception ex){
+        toFile(exportedValidChannels, "valid.m3u");
+        toFile(exportedInvalidChannels, "invalid.m3u");
+        toFile(allChannels, "all.m3u");
+    }
 
-            }
-            Files.write(path, exportedValidChannels.getBytes());
-            System.out.println(Files.readAllLines(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private static void toFile(String exportedInvalidChannels, String fileName) {
         try {
-            Path path = Paths.get("invalid.m3u");
+            Path path = Paths.get(fileName);
             System.out.println(path.getFileName().toString());
             try {
                 Files.createFile(path);
-            } catch (Exception ex){
-
+            } catch (Exception ignored) {
             }
             Files.write(path, exportedInvalidChannels.getBytes());
             System.out.println(Files.readAllLines(path));
