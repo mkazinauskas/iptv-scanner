@@ -1,0 +1,19 @@
+#EXTINF:-1,LRT Televizija HD
+udp://@233.136.41.158:1234
+
+# http://localhost:1111/udp/233.136.41.158:1234
+
+#EXTINF:-1,LRT Televizija
+udp://@233.136.41.170:1234
+
+#EXTINF:-1,LRT Lituanica
+udp://@233.136.41.147:1234
+
+#EXTINF:-1,LRT Plius
+udp://@233.136.41.171:1234
+
+# #EXTINF:-1,TV3 HD
+# udp://@239.255.12.13:1234
+
+#EXTINF:-1,TV3
+udp://@233.136.41.39:1234

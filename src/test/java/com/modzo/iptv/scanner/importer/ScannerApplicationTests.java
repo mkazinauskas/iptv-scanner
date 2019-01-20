@@ -1,4 +1,4 @@
-package com.modzo.iptv.scanner;
+package com.modzo.iptv.scanner.importer;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
