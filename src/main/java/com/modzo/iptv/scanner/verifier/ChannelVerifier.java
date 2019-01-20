@@ -54,7 +54,7 @@ public class ChannelVerifier {
     private static boolean read(URL url) {
         byte[] b = null;
         try {
-            b = Base64.encodeBase64(IOUtils.readFully((url).openStream(), 100), true);
+            b = IOUtils.readFully((url).openStream(), 5);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
