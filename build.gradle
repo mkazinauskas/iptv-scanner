@@ -23,10 +23,11 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compile group: 'commons-io', name: 'commons-io', version: '2.6'
-	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework:spring-web'
+	implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation group: 'org.spockframework', name: 'spock-spring', version: '1.2-groovy-2.5'

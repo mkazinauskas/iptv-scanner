@@ -2,6 +2,8 @@ package com.modzo.iptv.scanner.importer;
 
 import com.modzo.iptv.scanner.Channel;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Component
 public class ReadChannelsFromFile {
 
     public List<Channel> doImport(String content) {

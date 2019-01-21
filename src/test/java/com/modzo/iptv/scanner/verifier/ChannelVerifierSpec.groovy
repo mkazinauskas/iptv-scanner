@@ -4,7 +4,7 @@ import com.modzo.iptv.scanner.Channel
 import spock.lang.Specification
 
 class ChannelVerifierSpec extends Specification {
-    ChannelVerifier testTarget = new ChannelVerifier()
+    ChannelVerifier testTarget = new ChannelVerifier('http://localhost:1111/udp/', 1)
 
     void 'channel should be working'() {
         given:

@@ -1,0 +1,26 @@
+application:
+  udpxyUrl: http://localhost:1111/udp/
+  pingRetries: 2
+  sortingList:
+    - ltv
+    - lrt
+    - tv3 hd
+    - tv3
+    - lnk hd
+    - lnk
+    - tv6 hd
+    - tv6
+    - btv hd
+    - btv
+    - tv1
+    - Balticum Auksinis
+    - Balticum
+    - Tv1000 premium
+    - Tv1000
+    - MTV
+    - eurosport hd
+    - eurosport
+    - Info tv
+    - liuks
+    - Lietuvos Rytas
+    - Lietuvos ryto

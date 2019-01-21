@@ -1,10 +1,12 @@
 package com.modzo.iptv.scanner.exporter;
 
 import com.modzo.iptv.scanner.Channel;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class M3uExporter {
 
     public String export(List<Channel> channels) {
