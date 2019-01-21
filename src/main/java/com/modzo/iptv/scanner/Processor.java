@@ -81,7 +81,7 @@ public class Processor implements CommandLineRunner {
                 .stream()
                 .map(future -> {
                     try {
-                        System.out.println("Tasks left: " + EXECUTOR.getTaskCount());
+                        System.out.println("Tasks left: " + EXECUTOR.getQueue().size());
                         return future.get();
                     } catch (Exception e) {
                         e.printStackTrace();
