@@ -43,9 +43,12 @@ public class SimpleTest {
         List<Channel> verifiedChannels = channels.stream()
                 .map(channel -> EXECUTOR.submit(() -> {
                     if (verifier.isValidChannel(channel)) {
+                        System.out.println("Processed: " + channel.toString());
                         return channel;
                     } else {
-                        return channel.invalidChannel();
+                        Channel invalidChannel = channel.invalidChannel();
+                        System.out.println("Processed and marked failed: " + invalidChannel.toString());
+                        return invalidChannel;
                     }
                 }))
                 .collect(Collectors.toList())
@@ -53,12 +56,10 @@ public class SimpleTest {
                 .map(future -> {
                     try {
                         Channel channel = future.get();
-                        System.out.println("Processed: " + channel.getName());
+                        System.out.println("Processed: " + channel.toString());
                         return channel;
-                    } catch (InterruptedException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
-                        throw new RuntimeException(e.getMessage(), e);
-                    } catch (ExecutionException e) {
                         throw new RuntimeException(e.getMessage(), e);
                     }
                 })

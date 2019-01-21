@@ -50,4 +50,13 @@ public class Channel {
 
         return Objects.hash(uri);
     }
+
+    @Override
+    public String toString() {
+        return "Channel{" +
+                "name='" + name + '\'' +
+                ", uri=" + uri +
+                ", valid=" + valid +
+                '}';
+    }
 }
