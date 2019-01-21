@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
@@ -31,6 +32,7 @@ public class ChannelVerifier {
             .setConnectTimeout(Duration.ofSeconds(10))
             .setReadTimeout(Duration.ofSeconds(5))
             .messageConverters(new CustomByArrayMessageConverter())
+            .requestFactory(NotBufferingRequestInterceptor.class)
             .build();
 
     @Autowired
@@ -73,7 +75,8 @@ public class ChannelVerifier {
 
     private boolean validViaRestTemplate(URL url) {
         try {
-            return restTemplate.getForEntity(url.toURI(), byte[].class).getBody().length > 0;
+            ResponseEntity<byte[]> response = restTemplate.getForEntity(url.toURI(), byte[].class);
+            return response.getBody() != null && response.getBody().length > 0;
         } catch (URISyntaxException | ResourceAccessException e) {
             return false;
         }

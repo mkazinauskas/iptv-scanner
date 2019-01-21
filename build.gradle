@@ -29,6 +29,8 @@ dependencies {
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation group: 'org.spockframework', name: 'spock-spring', version: '1.2-groovy-2.5'
 }
