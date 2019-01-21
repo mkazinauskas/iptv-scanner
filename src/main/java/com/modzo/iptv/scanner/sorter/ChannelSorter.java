@@ -40,6 +40,11 @@ public class ChannelSorter {
                 .forEach(finalList::add);
 
         channels.parallelStream()
+                .filter(channel -> channel.getName().toLowerCase().replaceAll(" ", "")
+                        .startsWith(name.replaceAll(" ", "")))
+                .forEach(finalList::add);
+
+        channels.parallelStream()
                 .filter(channel -> channel.getName().toLowerCase().startsWith(name))
                 .forEach(finalList::add);
 

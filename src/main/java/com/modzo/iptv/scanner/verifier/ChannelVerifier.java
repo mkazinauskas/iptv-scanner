@@ -7,12 +7,15 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.Objects;
 
 @Component
@@ -23,6 +26,12 @@ public class ChannelVerifier {
     private final String udpxy;
 
     private final int retries;
+
+    private final RestTemplate restTemplate = new RestTemplateBuilder()
+            .setConnectTimeout(Duration.ofSeconds(10))
+            .setReadTimeout(Duration.ofSeconds(5))
+            .messageConverters(new CustomByArrayMessageConverter())
+            .build();
 
     @Autowired
     public ChannelVerifier(ApplicationConfiguration configuration) {
@@ -46,12 +55,11 @@ public class ChannelVerifier {
         }
 
         for (int i = 0; i < retries; i++) {
-
             if (isWorking(url)) {
                 return true;
             }
             try {
-                Thread.sleep(5000l);
+                Thread.sleep(5000L);
             } catch (InterruptedException ex) {
                 LOGGER.debug("Failed to sleep thread", ex);
             }
@@ -59,15 +67,24 @@ public class ChannelVerifier {
         return false;
     }
 
-    private static boolean isWorking(URL url) {
-        byte[] b = null;
+    private boolean isWorking(URL url) {
+        return validViaCrazyStuff(url) || validViaRestTemplate(url);
+    }
+
+    private boolean validViaRestTemplate(URL url) {
         try {
-            ResponseEntity<String> forEntity = new RestTemplate().getForEntity(url.toURI(), String.class);
-            b = IOUtils.readFully((url).openStream(), 5);
-        } catch (Exception ex) {
-            LOGGER.debug("Failed to open steam", ex);
+            return restTemplate.getForEntity(url.toURI(), byte[].class).getBody().length > 0;
+        } catch (URISyntaxException | ResourceAccessException e) {
             return false;
         }
-        return b != null;
+    }
+
+    private boolean validViaCrazyStuff(URL url) {
+        try {
+            return IOUtils.readFully((url).openStream(), 5).length > 0;
+        } catch (Exception ex) {
+            LOGGER.debug("Failed read url...", ex);
+            return false;
+        }
     }
 }

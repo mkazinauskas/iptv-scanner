@@ -15,7 +15,7 @@ class ChannelVerifierSpec extends Specification {
 
     void 'channel should be not working'() {
         given:
-            Channel channel = new Channel('Working channel', URI.create('udp://@239.255.12.13:1234'))
+            Channel channel = new Channel('Working channel', URI.create('udp://@239.255.1.1:1234'))
         expect:
             !testTarget.isValidChannel(channel)
     }
