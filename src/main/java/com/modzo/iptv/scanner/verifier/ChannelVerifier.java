@@ -36,23 +36,23 @@ public class ChannelVerifier {
 
     @ImprovementNeeded("Rewrite with methods...")
     public boolean isValidChannel(Channel channel) {
-        HeadlessMediaPlayer embeddedMediaPlayer = factory.newHeadlessMediaPlayer();
-        embeddedMediaPlayer.prepareMedia(channel.getUri().toString());
-        embeddedMediaPlayer.play();
+        HeadlessMediaPlayer headlesMediaPlayer = factory.newHeadlessMediaPlayer();
+        headlesMediaPlayer.prepareMedia(channel.getUri().toString(), "no-video", "no-audio" );
+        headlesMediaPlayer.play();
 
         RetryPolicy retryPolicy = new RetryPolicy()
                 .retryWhen(false)
                 .withDelay(10, TimeUnit.SECONDS)
                 .withMaxRetries(retries);
 
-        Failsafe.with(retryPolicy).get(embeddedMediaPlayer::isPlaying);
+        Failsafe.with(retryPolicy).get(headlesMediaPlayer::isPlaying);
 
-        if (embeddedMediaPlayer.isPlaying()) {
-            embeddedMediaPlayer.stop();
+        if (headlesMediaPlayer.isPlaying()) {
+            headlesMediaPlayer.stop();
             return true;
         } else {
             LOGGER.debug("Channel is not working `{}`", channel.toString());
-            embeddedMediaPlayer.stop();
+            headlesMediaPlayer.stop();
             return false;
         }
     }
