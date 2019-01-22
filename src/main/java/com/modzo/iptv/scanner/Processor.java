@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Component
 public class Processor implements CommandLineRunner {
 
-    private static final ThreadPoolExecutor EXECUTOR = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+    private static final ThreadPoolExecutor EXECUTOR = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
 
 
     private final ChannelSorter channelSorter;
