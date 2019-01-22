@@ -5,5 +5,4 @@ Currently you need to have installed and launched `udpxy` program, to convert ud
 
 ## Improvements
 * Code is not clean
-* Do not remove channel language from playlist
 * Remove udpxy dependency

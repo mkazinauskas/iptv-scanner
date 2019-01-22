@@ -1,28 +1,37 @@
 package com.modzo.iptv.scanner;
 
-import java.net.*;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.net.URI;
 import java.util.Objects;
 
 public class Channel {
 
     private final String name;
+    private final String channel;
     private final URI uri;
     private final boolean valid;
 
-    public Channel(String name, URI uri, boolean valid) {
+    public Channel(String name, String channel, URI uri, boolean valid) {
         this.name = name;
+        this.channel = channel;
         this.uri = uri;
         this.valid = valid;
     }
 
-    public Channel(String name, URI uri) {
+    public Channel(String name, String channel, URI uri) {
         this.name = name;
+        this.channel = channel;
         this.uri = uri;
         this.valid = true;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getChannel() {
+        return channel;
     }
 
     public URI getUri() {
@@ -33,8 +42,8 @@ public class Channel {
         return valid;
     }
 
-    public Channel invalidChannel (){
-        return new Channel(this.name, this.uri, false);
+    public Channel invalidChannel() {
+        return new Channel(this.name, channel, this.uri, false);
     }
 
     @Override
@@ -53,10 +62,11 @@ public class Channel {
 
     @Override
     public String toString() {
-        return "Channel{" +
-                "name='" + name + '\'' +
-                ", uri=" + uri +
-                ", valid=" + valid +
-                '}';
+        return new ToStringBuilder(this)
+                .append("name", name)
+                .append("channel", channel)
+                .append("uri", uri)
+                .append("valid", valid)
+                .toString();
     }
 }

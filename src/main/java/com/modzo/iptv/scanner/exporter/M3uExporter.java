@@ -15,7 +15,7 @@ public class M3uExporter {
 
     private String channelLines(List<Channel> channels) {
         return channels.stream()
-                .map(channel -> "#EXTINF:-1," + channel.getName() + "\n" + channel.getUri().toString())
+                .map(channel -> "#EXTINF:" + channel.getChannel() + "," + channel.getName() + "\n" + channel.getUri().toString())
                 .collect(Collectors.joining("\n\n"));
     }
 }

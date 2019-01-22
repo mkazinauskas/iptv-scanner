@@ -2,7 +2,6 @@ package com.modzo.iptv.scanner.importer;
 
 import com.modzo.iptv.scanner.Channel;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
@@ -20,7 +19,7 @@ public class ReadChannelsFromFile {
         List<String> lines = Stream.of(content.split("\n"))
                 .filter(StringUtils::isNotBlank)
                 .map(StringUtils::trim)
-                .filter(line -> line.startsWith("#EXTINF:-1,") || line.startsWith("udp://@"))
+                .filter(line -> line.startsWith("#EXTINF:") || line.startsWith("udp://@"))
                 .collect(Collectors.toList());
 
         Set<Channel> channels = new LinkedHashSet<>();
@@ -31,9 +30,13 @@ public class ReadChannelsFromFile {
             String secondLine = lines.get(i);
             i++;
 
-            if (firstLine.startsWith("#EXTINF:-1,") && secondLine.startsWith("udp://@")) {
+            if (firstLine.startsWith("#EXTINF:") && secondLine.startsWith("udp://@")) {
+                String[] channelWithName = firstLine.replace("#EXTINF:", "").split(",");
+                String channel = channelWithName[0];
+                String name = channelWithName[1];
+
                 channels.add(
-                        new Channel(firstLine.replace("#EXTINF:-1,", ""), URI.create(secondLine))
+                        new Channel(name, channel, URI.create(secondLine))
                 );
             } else {
                 i--;

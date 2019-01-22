@@ -2,5 +2,5 @@
 #EXTINF:-1,LRT Televizija HD
 udp://@233.136.41.158:1234
 
-#EXTINF:-1,LRT Televizija
+#EXTINF:2,LRT Televizija
 udp://@233.136.41.170:1234
