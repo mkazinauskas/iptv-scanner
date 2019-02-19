@@ -1,0 +1,41 @@
+databaseChangeLog:
+- changeSet:
+    id: 1
+    author: modestukasai
+    changes:
+    - createTable:
+        tableName: channels
+        columns:
+        - column:
+            name: id
+            type: bigint
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              nullable: false
+        - column:
+            name: creation_date
+            type: timestamp
+            constraints:
+              nullable: false
+        - column:
+            name: name
+            type: varchar(100)
+            constraints:
+              nullable: true
+        - column:
+            name: sound_track
+            type: int
+            constraints:
+              nullable: false
+        - column:
+            name: url
+            type: varchar(100)
+            constraints:
+              nullable: false
+              unique: true
+    - createSequence:
+        schemaName: public
+        sequenceName: channels_sequence
+        incrementBy: 1
+        startValue: 1

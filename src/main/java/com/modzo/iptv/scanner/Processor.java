@@ -16,11 +16,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class Processor implements CommandLineRunner {
 
     private static final ThreadPoolExecutor EXECUTOR = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
-
 
     private final ChannelSorter channelSorter;
 

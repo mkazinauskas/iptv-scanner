@@ -1,9 +1,9 @@
 package com.modzo.iptv.scanner;
 
-import com.sun.istack.internal.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Component
@@ -11,6 +11,7 @@ import java.util.List;
 public class ApplicationConfiguration {
     @NotNull
     private String udpxyUrl;
+
     @NotNull
     private Integer pingRetries;
 

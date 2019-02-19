@@ -3,16 +3,15 @@ server:
   port: 8080
 
 spring:
-  profiles.active: prod
+  profiles.active: test
   jpa:
     hibernate:
       ddl-auto: validate
     properties.hibernate.jdbc.lob.non_contextual_creation: true
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/iptv_scanner
-    username: iptv
-    password: password
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:postgresql:10://hostname/databasename
+
 
 application:
   udpxyUrl: http://localhost:1111/udp/

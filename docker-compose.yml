@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  iptv-scanner-database:
+    image: postgres:10
+    environment:
+      POSTGRES_USER: iptv
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: iptv_scanner
+    ports:
+     - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+    driver: local
