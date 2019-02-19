@@ -1,4 +1,4 @@
-package com.modzo.iptv.scanner.channel.verification;
+package com.modzo.iptv.scanner.channel.verify;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

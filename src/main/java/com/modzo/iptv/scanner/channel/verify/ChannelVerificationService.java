@@ -1,4 +1,4 @@
-package com.modzo.iptv.scanner.channel.verification;
+package com.modzo.iptv.scanner.channel.verify;
 
 import com.modzo.iptv.scanner.database.Channel;
 import com.modzo.iptv.scanner.database.Channels;
