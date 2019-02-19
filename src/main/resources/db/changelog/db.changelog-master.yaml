@@ -24,6 +24,11 @@ databaseChangeLog:
             constraints:
               nullable: true
         - column:
+            name: working
+            type: bool
+            constraints:
+              nullable: false
+        - column:
             name: sound_track
             type: int
             constraints:

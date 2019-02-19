@@ -21,6 +21,9 @@ public class Channel {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "working", nullable = false)
+    private boolean working;
+
     @Column(name = "sound_track", nullable = false)
     private Integer soundTrack;
 
@@ -44,6 +47,14 @@ public class Channel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean getWorking() {
+        return working;
+    }
+
+    public void setWorking(Boolean working) {
+        this.working = working;
     }
 
     public Integer getSoundTrack() {

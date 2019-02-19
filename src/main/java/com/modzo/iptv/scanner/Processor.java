@@ -4,10 +4,9 @@ import com.modzo.iptv.scanner.exporter.FileWriter;
 import com.modzo.iptv.scanner.exporter.M3uExporter;
 import com.modzo.iptv.scanner.importer.ReadChannelsFromFile;
 import com.modzo.iptv.scanner.sorter.ChannelSorter;
-import com.modzo.iptv.scanner.verifier.ChannelVerifier;
+import com.modzo.iptv.scanner.channel.verification.ChannelVerifier;
 import org.apache.commons.io.FileUtils;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,7 +66,7 @@ public class Processor implements CommandLineRunner {
 
         List<Channel> verifiedChannels = channels.stream()
                 .map(channel -> EXECUTOR.submit(() -> {
-                    if (channelVerifier.isValidChannel(channel)) {
+                    if (channelVerifier.isWorkingChannel(null)) {
                         System.out.println("Processed: " + channel.toString());
                         return channel;
                     } else {
