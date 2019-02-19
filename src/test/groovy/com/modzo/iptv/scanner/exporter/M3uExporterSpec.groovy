@@ -1,6 +1,7 @@
 package com.modzo.iptv.scanner.exporter
 
 import com.modzo.iptv.scanner.Channel
+import com.modzo.iptv.scanner.channel.export.M3uExporter
 import spock.lang.Specification
 
 class M3uExporterSpec extends Specification {

@@ -24,8 +24,8 @@ databaseChangeLog:
             constraints:
               nullable: true
         - column:
-            name: working
-            type: bool
+            name: status
+            type: varchar(100)
             constraints:
               nullable: false
         - column:

@@ -22,10 +22,10 @@ public class ChannelVerificationService {
         this.changeChannelStatusHandler = changeChannelStatusHandler;
     }
 
-    public void verify(long channelId){
+    public void verify(long channelId) {
         Channel channel = channels.findById(channelId)
                 .orElseThrow(() -> new RuntimeException("Channel was not found!"));
-        boolean workingCChannel = verifier.isWorkingChannel(channel);
-        changeChannelStatusHandler.handle(new ChangeChannelStatusHandler.Request(channelId, workingCChannel));
+        Channel.Status status = verifier.isWorkingChannel(channel) ? Channel.Status.WORKING : Channel.Status.NOT_WORKING;
+        changeChannelStatusHandler.handle(new ChangeChannelStatusHandler.Request(channelId, status));
     }
 }

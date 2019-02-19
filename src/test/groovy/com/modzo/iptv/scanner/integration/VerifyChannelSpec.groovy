@@ -22,7 +22,7 @@ class VerifyChannelSpec extends IntegrationSpec {
             Long savedChannelId = createResponse.headers.getLocation().toString().split('/').last() as Long
         when:
             ResponseEntity<String> verifyResponse = restTemplate.postForEntity(
-                    "/channels/${savedChannelId}/verification", null, String
+                    "/channels/${savedChannelId}/verify", null, String
             )
         then:
             verifyResponse.statusCode == HttpStatus.ACCEPTED

@@ -18,17 +18,17 @@ public class ChangeChannelStatusHandler {
     public void handle(Request request) {
         Channel channel = channels.findById(request.id)
                 .orElseThrow(() -> new RuntimeException("Channel not found"));
-        channel.setWorking(request.working);
+        channel.setStatus(request.status);
     }
 
     public static class Request {
         private final long id;
 
-        private final boolean working;
+        private final Channel.Status status;
 
-        public Request(long id, boolean working) {
+        public Request(long id, Channel.Status status) {
             this.id = id;
-            this.working = working;
+            this.status = status;
         }
     }
 }

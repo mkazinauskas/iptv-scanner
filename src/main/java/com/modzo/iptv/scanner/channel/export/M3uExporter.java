@@ -1,6 +1,6 @@
-package com.modzo.iptv.scanner.exporter;
+package com.modzo.iptv.scanner.channel.export;
 
-import com.modzo.iptv.scanner.Channel;
+import com.modzo.iptv.scanner.database.Channel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class M3uExporter {
 
     private String channelLines(List<Channel> channels) {
         return channels.stream()
-                .map(channel -> "#EXTINF:" + channel.getChannel() + "," + channel.getName() + "\n" + channel.getUri().toString())
+                .map(channel -> "#EXTINF:" + channel.getSoundTrack() + "," + channel.getName() + "\n" + channel.getUrl())
                 .collect(Collectors.joining("\n\n"));
     }
 }

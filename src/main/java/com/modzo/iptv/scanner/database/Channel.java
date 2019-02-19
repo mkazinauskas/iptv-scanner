@@ -9,6 +9,10 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "channels")
 public class Channel {
 
+   public enum Status{
+        WORKING, NOT_WORKING, UNKNOWN;
+    }
+
     @Id
     @GeneratedValue(generator = "channels_sequence", strategy = SEQUENCE)
     @SequenceGenerator(name = "channels_sequence", sequenceName = "channels_sequence", allocationSize = 1)
@@ -21,8 +25,9 @@ public class Channel {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "working", nullable = false)
-    private boolean working;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private Status status = Status.UNKNOWN;
 
     @Column(name = "sound_track", nullable = false)
     private Integer soundTrack;
@@ -49,12 +54,12 @@ public class Channel {
         this.name = name;
     }
 
-    public boolean getWorking() {
-        return working;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setWorking(Boolean working) {
-        this.working = working;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Integer getSoundTrack() {
