@@ -3,7 +3,7 @@ server:
   port: 8080
 
 spring:
-  profiles.active: prod
+  profiles.active: dev
   jpa:
     hibernate:
       ddl-auto: validate
@@ -15,9 +15,8 @@ spring:
     password: password
 
 application:
-  udpxyUrl: http://localhost:1111/udp/
-  pingRetries: 3
-  delayRetries: 8
+  pingRetries: 10
+  delayRetries: 2
   sortingList:
     - ltv
     - lrt

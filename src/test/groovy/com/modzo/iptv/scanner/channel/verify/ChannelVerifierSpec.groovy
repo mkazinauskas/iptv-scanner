@@ -1,10 +1,16 @@
 package com.modzo.iptv.scanner.channel.verify
 
+import com.modzo.iptv.scanner.ApplicationConfiguration
 import com.modzo.iptv.scanner.domain.Channel
 import spock.lang.Specification
 
 class ChannelVerifierSpec extends Specification {
-    ChannelVerifier testTarget = new ChannelVerifier('http://localhost:1111/udp/', 1)
+    ChannelVerifier testTarget = new ChannelVerifier(
+            new ApplicationConfiguration(
+                    delayRetries: 5,
+                    pingRetries: 2
+            )
+    )
 
     void 'channel should be working'() {
         given:

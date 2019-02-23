@@ -8,9 +8,18 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: iptv_scanner
     ports:
-     - "5432:5432"
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+  iptv-scanner-application:
+    image: iptv-scanner
+    environment:
+      APPLICATION_PORT: 8181
+      DATABASE_URL: jdbc:postgresql://iptv-scanner-database:5432/iptv_scanner
+      DATABASE_USERNAME: iptv
+      DATABASE_PASSWORD: password
+    ports:
+      - "8181:8181"
 
 volumes:
   pgdata:

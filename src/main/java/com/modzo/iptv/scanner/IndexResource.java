@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class IndexResource {
     @GetMapping(value = "/")
     public ModelAndView index(ModelMap model) {
-        model.addAttribute("attribute", "forwardWithForwardPrefix");
-        return new ModelAndView("forward:/swagger-ui.html", model);
+        return new ModelAndView("redirect:/swagger-ui.html", model);
     }
 }

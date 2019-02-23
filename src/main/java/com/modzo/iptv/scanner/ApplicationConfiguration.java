@@ -9,8 +9,6 @@ import java.util.List;
 @Component
 @ConfigurationProperties(prefix = "application")
 public class ApplicationConfiguration {
-    @NotNull
-    private String udpxyUrl;
 
     @NotNull
     private Integer pingRetries;
@@ -20,14 +18,6 @@ public class ApplicationConfiguration {
 
     @NotNull
     private List<String> sortingList;
-
-    public String getUdpxyUrl() {
-        return udpxyUrl;
-    }
-
-    public void setUdpxyUrl(String udpxyUrl) {
-        this.udpxyUrl = udpxyUrl;
-    }
 
     public Integer getPingRetries() {
         return pingRetries;

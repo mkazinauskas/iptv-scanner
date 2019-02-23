@@ -20,18 +20,12 @@ public class ChannelVerifier {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChannelVerifier.class);
 
-    private final int retries;
+    private final ApplicationConfiguration configuration;
 
     private final static MediaPlayerFactory factory = new MediaPlayerFactory();
 
-    @Autowired
     public ChannelVerifier(ApplicationConfiguration configuration) {
-        this(configuration.getUdpxyUrl(), configuration.getPingRetries());
-    }
-
-    ChannelVerifier(String udpxy, int retries) {
-        Objects.requireNonNull(udpxy);
-        this.retries = retries;
+        this.configuration = configuration;
     }
 
     @ImprovementNeeded("Rewrite with methods...")
@@ -42,8 +36,8 @@ public class ChannelVerifier {
 
         RetryPolicy retryPolicy = new RetryPolicy()
                 .retryWhen(false)
-                .withDelay(10, TimeUnit.SECONDS)
-                .withMaxRetries(retries);
+                .withDelay(configuration.getDelayRetries(), TimeUnit.SECONDS)
+                .withMaxRetries(configuration.getPingRetries());
 
         Failsafe.with(retryPolicy).get(headlesMediaPlayer::isPlaying);
 

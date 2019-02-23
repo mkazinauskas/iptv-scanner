@@ -1,21 +1,22 @@
 server:
   connection-timeout: 5000s
-  port: 8080
+  port: ${APPLICATION_PORT}
 
 spring:
-  profiles.active: test
+  profiles.active: prod
   jpa:
     hibernate:
       ddl-auto: validate
     properties.hibernate.jdbc.lob.non_contextual_creation: true
   datasource:
-    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
-    url: jdbc:tc:postgresql:10://hostname/databasename
-
+    driver-class-name: org.postgresql.Driver
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
 
 application:
-  delayRetries: 1
-  pingRetries: 1
+  pingRetries: 3
+  delayRetries: 8
   sortingList:
     - ltv
     - lrt
