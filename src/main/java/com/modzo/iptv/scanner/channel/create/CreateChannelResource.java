@@ -1,6 +1,6 @@
 package com.modzo.iptv.scanner.channel.create;
 
-import com.modzo.iptv.scanner.database.commands.CreateChannelHandler;
+import com.modzo.iptv.scanner.domain.commands.CreateChannelHandler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +19,7 @@ public class CreateChannelResource {
     @PostMapping(value = "/channels")
     public ResponseEntity createChannel(@RequestBody CreateChannelRequest request) {
         CreateChannelHandler.Response result = handler.handle(
-                new CreateChannelHandler.Request(request.getName(), request.getSoundTrack(), request.getUrl())
+                new CreateChannelHandler.Request(request.getName(), request.getSoundTrack(), request.getUri())
         );
         return ResponseEntity.created(URI.create("/channels/" + result.getId())).build();
     }

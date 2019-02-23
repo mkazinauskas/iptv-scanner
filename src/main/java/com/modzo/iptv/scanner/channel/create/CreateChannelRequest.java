@@ -2,10 +2,10 @@ package com.modzo.iptv.scanner.channel.create;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.net.URI;
 
 public class CreateChannelRequest {
 
@@ -16,16 +16,15 @@ public class CreateChannelRequest {
     private final int soundTrack;
 
     @NotNull
-    @URL
-    private final String url;
+    private final URI uri;
 
     @JsonCreator
     public CreateChannelRequest(@JsonProperty("name") String name,
                                 @JsonProperty("soundTrack") int soundTrack,
-                                @JsonProperty("url") String url) {
+                                @JsonProperty("url") URI uri) {
         this.name = name;
         this.soundTrack = soundTrack;
-        this.url = url;
+        this.uri = uri;
     }
 
     public String getName() {
@@ -36,7 +35,7 @@ public class CreateChannelRequest {
         return soundTrack;
     }
 
-    public String getUrl() {
-        return url;
+    public URI getUri() {
+        return uri;
     }
 }

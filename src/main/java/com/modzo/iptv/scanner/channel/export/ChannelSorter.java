@@ -1,7 +1,8 @@
-package com.modzo.iptv.scanner.sorter;
+package com.modzo.iptv.scanner.channel.export;
 
 import com.modzo.iptv.scanner.ApplicationConfiguration;
-import com.modzo.iptv.scanner.Channel;
+import com.modzo.iptv.scanner.channel.importer.ChannelsParser;
+import com.modzo.iptv.scanner.domain.Channel;
 import org.springframework.stereotype.Component;
 
 import java.util.*;

@@ -1,8 +1,8 @@
-package com.modzo.iptv.scanner.integration
+package com.modzo.iptv.scanner
 
-import com.modzo.iptv.scanner.database.Channels
-import com.modzo.iptv.scanner.database.commands.ChangeChannelStatusHandler
-import com.modzo.iptv.scanner.integration.helpers.TestChannel
+import com.modzo.iptv.scanner.channel.helpers.TestChannel
+import com.modzo.iptv.scanner.domain.Channels
+import com.modzo.iptv.scanner.domain.commands.ChangeChannelStatusHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate

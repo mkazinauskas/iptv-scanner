@@ -1,8 +1,8 @@
 package com.modzo.iptv.scanner.channel.verify;
 
-import com.modzo.iptv.scanner.database.Channel;
-import com.modzo.iptv.scanner.database.Channels;
-import com.modzo.iptv.scanner.database.commands.ChangeChannelStatusHandler;
+import com.modzo.iptv.scanner.domain.Channel;
+import com.modzo.iptv.scanner.domain.Channels;
+import com.modzo.iptv.scanner.domain.commands.ChangeChannelStatusHandler;
 import org.springframework.stereotype.Service;
 
 @Service

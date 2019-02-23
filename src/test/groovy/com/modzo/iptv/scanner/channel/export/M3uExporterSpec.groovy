@@ -1,7 +1,6 @@
-package com.modzo.iptv.scanner.exporter
+package com.modzo.iptv.scanner.channel.export
 
-import com.modzo.iptv.scanner.Channel
-import com.modzo.iptv.scanner.channel.export.M3uExporter
+import com.modzo.iptv.scanner.domain.Channel
 import spock.lang.Specification
 
 class M3uExporterSpec extends Specification {
@@ -11,8 +10,8 @@ class M3uExporterSpec extends Specification {
     void 'should export list'() {
         given:
             List<Channel> channels = [
-                    new Channel('LRT Televizija HD', '-1', URI.create('udp://@233.136.41.158:1234')),
-                    new Channel('LRT Televizija', '2', URI.create('udp://@233.136.41.170:1234')),
+                    new Channel(name: 'LRT Televizija HD', soundTrack: -1, uri: URI.create('udp://@233.136.41.158:1234')),
+                    new Channel(name: 'LRT Televizija', soundTrack: 2, uri: URI.create('udp://@233.136.41.170:1234')),
             ]
         when:
             String result = testTarget.export(channels)

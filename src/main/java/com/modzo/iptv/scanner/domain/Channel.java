@@ -1,6 +1,7 @@
-package com.modzo.iptv.scanner.database;
+package com.modzo.iptv.scanner.domain;
 
 import javax.persistence.*;
+import java.net.URI;
 import java.time.ZonedDateTime;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -9,7 +10,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "channels")
 public class Channel {
 
-   public enum Status{
+    public enum Status {
         WORKING, NOT_WORKING, UNKNOWN;
     }
 
@@ -32,8 +33,8 @@ public class Channel {
     @Column(name = "sound_track", nullable = false)
     private Integer soundTrack;
 
-    @Column(name = "url", unique = true)
-    private String url;
+    @Column(name = "uri", unique = true)
+    private String uri;
 
     public Channel() {
     }
@@ -70,11 +71,11 @@ public class Channel {
         this.soundTrack = soundTrack;
     }
 
-    public String getUrl() {
-        return url;
+    public URI getUri() {
+        return URI.create(uri);
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setUri(URI uri) {
+        this.uri = uri.toString();
     }
 }

@@ -1,9 +1,11 @@
-package com.modzo.iptv.scanner.database.commands;
+package com.modzo.iptv.scanner.domain.commands;
 
-import com.modzo.iptv.scanner.database.Channel;
-import com.modzo.iptv.scanner.database.Channels;
+import com.modzo.iptv.scanner.domain.Channel;
+import com.modzo.iptv.scanner.domain.Channels;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.net.URI;
 
 @Component
 public class CreateChannelHandler {
@@ -19,7 +21,7 @@ public class CreateChannelHandler {
         Channel channel = new Channel();
         channel.setName(request.name);
         channel.setSoundTrack(request.soundTrack);
-        channel.setUrl(request.url);
+        channel.setUri(request.url);
 
         Channel savedChannel = channels.save(channel);
         return new Response(savedChannel.getId());
@@ -42,12 +44,12 @@ public class CreateChannelHandler {
 
         private final int soundTrack;
 
-        private final String url;
+        private final URI url;
 
-        public Request(String name, int soundTrack, String url) {
+        public Request(String name, int soundTrack, URI uri) {
             this.name = name;
             this.soundTrack = soundTrack;
-            this.url = url;
+            this.url = uri;
         }
     }
 }

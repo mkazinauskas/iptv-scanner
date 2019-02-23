@@ -2,7 +2,7 @@ package com.modzo.iptv.scanner.channel.verify;
 
 import com.modzo.iptv.scanner.ApplicationConfiguration;
 import com.modzo.iptv.scanner.ImprovementNeeded;
-import com.modzo.iptv.scanner.database.Channel;
+import com.modzo.iptv.scanner.domain.Channel;
 import net.jodah.failsafe.Failsafe;
 import net.jodah.failsafe.RetryPolicy;
 import org.slf4j.Logger;
@@ -37,7 +37,7 @@ public class ChannelVerifier {
     @ImprovementNeeded("Rewrite with methods...")
     public boolean isWorkingChannel(Channel channel) {
         HeadlessMediaPlayer headlesMediaPlayer = factory.newHeadlessMediaPlayer();
-        headlesMediaPlayer.prepareMedia(channel.getUrl(), "no-video", "no-audio" );
+        headlesMediaPlayer.prepareMedia(channel.getUri().toString(), "no-video", "no-audio");
         headlesMediaPlayer.play();
 
         RetryPolicy retryPolicy = new RetryPolicy()

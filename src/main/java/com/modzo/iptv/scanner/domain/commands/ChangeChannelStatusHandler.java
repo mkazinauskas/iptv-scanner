@@ -1,7 +1,7 @@
-package com.modzo.iptv.scanner.database.commands;
+package com.modzo.iptv.scanner.domain.commands;
 
-import com.modzo.iptv.scanner.database.Channel;
-import com.modzo.iptv.scanner.database.Channels;
+import com.modzo.iptv.scanner.domain.Channel;
+import com.modzo.iptv.scanner.domain.Channels;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

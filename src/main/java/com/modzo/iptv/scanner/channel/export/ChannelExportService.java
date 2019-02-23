@@ -1,12 +1,13 @@
 package com.modzo.iptv.scanner.channel.export;
 
-import com.modzo.iptv.scanner.database.Channel;
-import com.modzo.iptv.scanner.database.Channels;
+import com.modzo.iptv.scanner.domain.Channel;
+import com.modzo.iptv.scanner.domain.Channels;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.Charset;
+import java.util.List;
 
 @Component
 class ChannelExportService {
@@ -15,22 +16,29 @@ class ChannelExportService {
 
     private final Channels channels;
 
-    public ChannelExportService(M3uExporter m3uExporter, Channels channels) {
+    private final ChannelSorter channelSorter;
+
+    public ChannelExportService(M3uExporter m3uExporter,
+                                Channels channels,
+                                ChannelSorter channelSorter) {
         this.m3uExporter = m3uExporter;
         this.channels = channels;
+        this.channelSorter = channelSorter;
     }
 
-    public byte[] export(Pageable pageable) {
+    public byte[] SortAndExport(Pageable pageable) {
         Page<Channel> channelsToExport = channels.findAll(pageable);
-        return export(channelsToExport);
+        return sortAndExport(channelsToExport);
     }
 
     public byte[] exportByStatus(Channel.Status status, Pageable pageable) {
         Page<Channel> channelsToExport = channels.findAllByStatus(status, pageable);
-        return export(channelsToExport);
+        return sortAndExport(channelsToExport);
     }
 
-    private byte[] export(Page<Channel> channelsToExport) {
-        return m3uExporter.export(channelsToExport.getContent()).getBytes(Charset.forName("UTF-8"));
+    private byte[] sortAndExport(Page<Channel> channelsToExport) {
+        List<Channel> content = channelsToExport.getContent();
+        List<Channel> sortedChannels = channelSorter.sort(content);
+        return m3uExporter.export(sortedChannels).getBytes(Charset.forName("UTF-8"));
     }
 }

@@ -34,7 +34,7 @@ databaseChangeLog:
             constraints:
               nullable: false
         - column:
-            name: url
+            name: uri
             type: varchar(100)
             constraints:
               nullable: false

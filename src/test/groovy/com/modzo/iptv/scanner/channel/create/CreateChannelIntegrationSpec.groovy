@@ -1,19 +1,19 @@
-package com.modzo.iptv.scanner.integration
+package com.modzo.iptv.scanner.channel.create
 
-import com.modzo.iptv.scanner.channel.create.CreateChannelRequest
-import com.modzo.iptv.scanner.database.Channel
-import com.modzo.iptv.scanner.integration.helpers.TestChannel
+import com.modzo.iptv.scanner.IntegrationSpec
+import com.modzo.iptv.scanner.domain.Channel
+import com.modzo.iptv.scanner.channel.helpers.TestChannel
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
-class CreateChannelSpec extends IntegrationSpec {
+class CreateChannelIntegrationSpec extends IntegrationSpec {
 
     void 'should create new channel in database'() {
         given:
             CreateChannelRequest request = new CreateChannelRequest(
                     TestChannel.randomName(),
                     TestChannel.randomSoundTrack(),
-                    TestChannel.randomUrl()
+                    TestChannel.randomUri()
             )
         when:
             ResponseEntity<String> response = restTemplate.postForEntity('/channels', request, String)
@@ -24,6 +24,6 @@ class CreateChannelSpec extends IntegrationSpec {
             savedChannel.creationDate
             savedChannel.name == request.name
             savedChannel.soundTrack == request.soundTrack
-            savedChannel.url == request.url
+            savedChannel.uri == request.uri
     }
 }

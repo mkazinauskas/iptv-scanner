@@ -1,6 +1,6 @@
 package com.modzo.iptv.scanner.channel.export;
 
-import com.modzo.iptv.scanner.database.Channel;
+import com.modzo.iptv.scanner.domain.Channel;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -21,7 +21,7 @@ public class ChannelsExportResource {
     @GetMapping(value = "/channels/export")
     public ResponseEntity<ByteArrayResource> export(Pageable pageable) {
 
-        byte[] data = channelExportService.export(pageable);
+        byte[] data = channelExportService.SortAndExport(pageable);
         ByteArrayResource resource = new ByteArrayResource(data);
 
         return ResponseEntity.ok()

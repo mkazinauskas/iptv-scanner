@@ -1,8 +1,8 @@
-package com.modzo.iptv.scanner.integration.helpers
+package com.modzo.iptv.scanner.channel.helpers
 
-import com.modzo.iptv.scanner.database.Channel
-import com.modzo.iptv.scanner.database.Channels
-import com.modzo.iptv.scanner.database.commands.CreateChannelHandler
+import com.modzo.iptv.scanner.domain.Channel
+import com.modzo.iptv.scanner.domain.Channels
+import com.modzo.iptv.scanner.domain.commands.CreateChannelHandler
 import org.apache.commons.lang3.RandomStringUtils
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
@@ -21,8 +21,8 @@ class TestChannel {
     @Transactional
     Channel create(String name = randomName(),
                    int soundTrack = randomSoundTrack(),
-                   String url = randomUrl()) {
-        CreateChannelHandler.Response result = handler.handle(new CreateChannelHandler.Request(name, soundTrack, url))
+                   URI uri = randomUri()) {
+        CreateChannelHandler.Response result = handler.handle(new CreateChannelHandler.Request(name, soundTrack, uri))
         return channels.findById(result.id).get()
     }
 
@@ -34,8 +34,8 @@ class TestChannel {
         return RandomStringUtils.randomNumeric(7) as int
     }
 
-    static String randomUrl() {
+    static URI randomUri() {
         int randomPort = RandomStringUtils.randomNumeric(4) as int
-        return "udp://@233.136.41.188:${randomPort}"
+        return URI.create("udp://@233.136.41.188:${randomPort}")
     }
 }
