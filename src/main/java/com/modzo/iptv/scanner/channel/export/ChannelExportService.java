@@ -22,6 +22,15 @@ class ChannelExportService {
 
     public byte[] export(Pageable pageable) {
         Page<Channel> channelsToExport = channels.findAll(pageable);
+        return export(channelsToExport);
+    }
+
+    public byte[] exportByStatus(Channel.Status status, Pageable pageable) {
+        Page<Channel> channelsToExport = channels.findAllByStatus(status, pageable);
+        return export(channelsToExport);
+    }
+
+    private byte[] export(Page<Channel> channelsToExport) {
         return m3uExporter.export(channelsToExport.getContent()).getBytes(Charset.forName("UTF-8"));
     }
 }

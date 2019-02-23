@@ -1,7 +1,6 @@
-package com.modzo.iptv.scanner.verifier
+package com.modzo.iptv.scanner.channel.verify
 
 import com.modzo.iptv.scanner.Channel
-import com.modzo.iptv.scanner.channel.verification.ChannelVerifier
 import spock.lang.Specification
 
 class ChannelVerifierSpec extends Specification {
