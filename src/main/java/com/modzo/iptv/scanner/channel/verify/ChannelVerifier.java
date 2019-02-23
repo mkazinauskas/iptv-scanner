@@ -32,6 +32,7 @@ public class ChannelVerifier {
     public boolean isWorkingChannel(Channel channel) {
         HeadlessMediaPlayer headlesMediaPlayer = factory.newHeadlessMediaPlayer();
         headlesMediaPlayer.prepareMedia(channel.getUri().toString(), "no-video", "no-audio");
+        headlesMediaPlayer.mute();
         headlesMediaPlayer.play();
 
         RetryPolicy retryPolicy = new RetryPolicy()
