@@ -7,12 +7,11 @@ import net.jodah.failsafe.Failsafe;
 import net.jodah.failsafe.RetryPolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import uk.co.caprica.vlcj.player.AudioOutput;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.headless.HeadlessMediaPlayer;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -20,12 +19,22 @@ public class ChannelVerifier {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChannelVerifier.class);
 
+    private final static MediaPlayerFactory factory = new MediaPlayerFactory();
+
     private final ApplicationConfiguration configuration;
 
-    private final static MediaPlayerFactory factory = new MediaPlayerFactory();
+    private final AudioOutput defaultAudioOutput;
 
     public ChannelVerifier(ApplicationConfiguration configuration) {
         this.configuration = configuration;
+        this.defaultAudioOutput = dummyAudio();
+    }
+
+    private AudioOutput dummyAudio() {
+        return factory.getAudioOutputs().stream()
+                .filter(it -> it.getName().contains("adummy"))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("No dummy Audio output"));
     }
 
     @ImprovementNeeded("Rewrite with methods...")
@@ -33,6 +42,7 @@ public class ChannelVerifier {
         HeadlessMediaPlayer headlesMediaPlayer = factory.newHeadlessMediaPlayer();
         headlesMediaPlayer.prepareMedia(channel.getUri().toString(), "no-video", "no-audio");
         headlesMediaPlayer.mute();
+        headlesMediaPlayer.setAudioOutput(defaultAudioOutput.getName());
         headlesMediaPlayer.play();
 
         RetryPolicy retryPolicy = new RetryPolicy()
