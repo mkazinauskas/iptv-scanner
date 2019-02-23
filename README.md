@@ -1,8 +1,7 @@
-# UDP streams scanner
+# UDP IPTV streams scanner
 
-## Dependencies
-Currently you need to have installed and launched `udpxy` program, to convert udp to http streaming.
-
-## Improvements
-* Code is not clean
-* Remove udpxy dependency
+## How to run
+1. `./gradlew build`
+2. `docker build . -t=iptv-scanner`
+3. `docker-compose up`
+4. Open browser: `http://localhost:8181`
