@@ -16,7 +16,8 @@ spring:
 
 application:
   udpxyUrl: http://localhost:1111/udp/
-  pingRetries: 2
+  pingRetries: 3
+  delayRetries: 8
   sortingList:
     - ltv
     - lrt

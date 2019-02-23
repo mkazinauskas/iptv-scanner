@@ -19,6 +19,7 @@ class CreateChannelIntegrationSpec extends IntegrationSpec {
             ResponseEntity<String> response = restTemplate.postForEntity('/channels', request, String)
         then:
             response.statusCode == HttpStatus.CREATED
+        and:
             Long savedChannelId = response.headers.getLocation().toString().split('/').last() as Long
             Channel savedChannel = channels.findById(savedChannelId).get()
             savedChannel.creationDate

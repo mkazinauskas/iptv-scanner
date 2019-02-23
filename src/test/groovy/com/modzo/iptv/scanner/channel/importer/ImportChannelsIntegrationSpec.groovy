@@ -21,6 +21,7 @@ class ImportChannelsIntegrationSpec extends IntegrationSpec {
             Channel firstChannel = channels.findByName('LRT Televizija HD').get()
             firstChannel.uri.toString() == 'udp://@233.136.41.158:1234'
             firstChannel.soundTrack == -1
+        and:
             Channel secondChannel = channels.findByName('LRT Televizija').get()
             secondChannel.uri.toString() == 'udp://@233.136.41.170:1234'
             secondChannel.soundTrack == 2

@@ -11,7 +11,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class Channel {
 
     public enum Status {
-        WORKING, NOT_WORKING, UNKNOWN;
+        WORKING, NOT_WORKING, UNKNOWN, IN_VALIDATION
     }
 
     @Id
