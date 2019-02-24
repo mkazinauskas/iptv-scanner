@@ -42,6 +42,7 @@ public class ChannelVerifier {
         HeadlessMediaPlayer headlesMediaPlayer = factory.newHeadlessMediaPlayer();
         headlesMediaPlayer.prepareMedia(channel.getUri().toString(), "no-video", "no-audio");
         headlesMediaPlayer.mute();
+        headlesMediaPlayer.setAudioOutputDevice(defaultAudioOutput.getName(), "");
         headlesMediaPlayer.setAudioOutput(defaultAudioOutput.getName());
         headlesMediaPlayer.play();
 
