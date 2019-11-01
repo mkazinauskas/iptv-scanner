@@ -1,6 +1,6 @@
 # UDP IPTV streams scanner
 
-## How to run in Docker
+## How to run in Docker (Not working yet...)
 WARNING: Known issue... Scanning will fail with error: vlcpulse audio output error: 
 `PulseAudio server connection failure: Connection refused`
 
