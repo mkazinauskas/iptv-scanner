@@ -10,8 +10,8 @@ class Channels extends React.Component {
     render() {
         return (
             <Container style={{ marginTop: '7em' }}>
-                <Header as='h1'>Semantic UI React Fixed Template</Header>
-                <p><ChannelsTable /></p>
+                <Header as='h1'>Current channels</Header>
+                <div><ChannelsTable /></div>
             </Container >
         );
     }
