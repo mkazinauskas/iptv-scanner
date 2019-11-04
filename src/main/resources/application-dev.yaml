@@ -12,6 +12,11 @@ spring:
     url: jdbc:postgresql://localhost:5432/iptv_scanner
     username: iptv
     password: password
+  security:
+    user:
+      name: admin
+      password: password1
+      roles: ADMIN
 
 application:
   pingRetries: 10
