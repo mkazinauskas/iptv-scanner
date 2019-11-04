@@ -13,8 +13,8 @@ class Channels extends React.Component {
             <Container style={{ marginTop: '7em' }}>
                 <Header as='h1'>Current channels</Header>
                 <div style={{ marginBottom: '0.5em' }}>
-                    <Button class="ui button" href="http://localhost:8080/channels/export?size=1000&status=WORKING" target="_blank">Download Working channels</Button>
-                    <Button class="ui button" href="http://localhost:8080/channels/export?size=1000" target="_blank">Download All channels</Button>
+                    <Button class="ui button" href="/channels/export?size=1000&status=WORKING" target="_blank">Download Working channels</Button>
+                    <Button class="ui button" href="/channels/export?size=1000" target="_blank">Download All channels</Button>
                 </div>
                 <ChannelsTable />
             </Container >

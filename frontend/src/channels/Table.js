@@ -26,7 +26,7 @@ class ChannelsTable extends React.Component {
             inVerification.add(channel.id);
         })
         this.setState({ inVerification }, () => this.loadPage);
-        axios.post(`http://localhost:8080/channels/verification?status=${this.state.status}`)
+        axios.post(`/channels/verification?status=${this.state.status}`)
             .then(res => {
                 this.loadPage();
             })
@@ -54,7 +54,7 @@ class ChannelsTable extends React.Component {
         const inVerification = this.state.inVerification;
         inVerification.add(id);
         this.setState({ inVerification }, () => this.loadPage);
-        axios.post(`http://localhost:8080/channels/${id}/verification`)
+        axios.post(`/channels/${id}/verification`)
             .then(res => {
                 this.loadPage();
             })
@@ -65,7 +65,7 @@ class ChannelsTable extends React.Component {
     }
 
     loadPage = () => {
-        axios.get(`http://localhost:8080/channels?sort=id,asc&page=${this.state.pagination.number}`)
+        axios.get(`/channels?sort=id,asc&page=${this.state.pagination.number}`)
             .then(res => {
                 const channels = res.data.content;
 

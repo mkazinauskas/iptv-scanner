@@ -52,3 +52,25 @@ dependencies {
 bootRun {
     bootRun.systemProperty 'spring.profiles.active', 'dev'
 }
+
+task resolveGUIDependencies(type: Exec) {
+    workingDir("$projectDir/frontend")
+    commandLine 'npm', 'install'
+    ignoreExitValue true
+}
+
+task buildGUI(type: Exec) {
+    workingDir("$projectDir/frontend")
+    commandLine 'npm', 'run', 'build'
+    ignoreExitValue true
+    dependsOn(tasks.resolveGUIDependencies)
+}
+
+task copyGUI(type: Copy) {
+    from file("$projectDir/frontend/build/")
+    into file("$buildDir/resources/main/gui")
+    dependsOn(tasks.buildGUI)
+}
+
+tasks.build.dependsOn copyGUI
+tasks.bootRun.dependsOn copyGUI
